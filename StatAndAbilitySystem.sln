@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatAndAbilitySystem", "StatAndAbilitySystem\StatAndAbilitySystem.csproj", "{C7B75C63-E816-4467-BAD6-242AFCA2AAFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7B75C63-E816-4467-BAD6-242AFCA2AAFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7B75C63-E816-4467-BAD6-242AFCA2AAFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7B75C63-E816-4467-BAD6-242AFCA2AAFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7B75C63-E816-4467-BAD6-242AFCA2AAFB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
