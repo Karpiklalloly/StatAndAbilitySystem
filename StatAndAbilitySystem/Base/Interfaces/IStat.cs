@@ -9,4 +9,5 @@ public interface IStat<T>
     
     public void ApplyModifier(params IModifier<T>[] modifiers);
     public void RemoveModifier(IModifier<T> modifier);
+    public void Recalculate();
 }

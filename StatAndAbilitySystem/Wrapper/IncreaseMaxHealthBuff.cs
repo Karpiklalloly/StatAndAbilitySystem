@@ -13,13 +13,13 @@ public class IncreaseMaxHealthBuff : Buff
 
     public override void Apply(Entity entity)
     {
-        entity.MaxHealth.ApplyModifier(Modifier);
-        entity.Health.Recalculate();
+        entity.Health.MaxValue.ApplyModifier(Modifier);
+        entity.Health.Value.Recalculate();
     }
 
     public override void Remove(Entity entity)
     {
-        entity.MaxHealth.RemoveModifier(Modifier);
-        entity.Health.Recalculate();
+        entity.Health.MaxValue.RemoveModifier(Modifier);
+        entity.Health.Value.Recalculate();
     }
 }

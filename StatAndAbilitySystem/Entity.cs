@@ -6,8 +6,7 @@ namespace StatAndAbilitySystem;
 
 public class Entity
 {
-    public Health Health { get; } = new(100);
-    public MaxHealth MaxHealth { get; } = new(100);
+    public EntityHealth Health { get; } = new(100, 100);
     public Mana Mana { get; } = new(new FloatValue(100));
     public Damage Damage { get; } = new(new FloatValue(10));
     public float Time => _time;
@@ -17,8 +16,7 @@ public class Entity
 
     public Entity()
     {
-        Health.ApplyModifier(new MaxValueModifier(
-            () => new FloatValue(float.MaxValue, MaxHealth.CurrentValue, float.MaxValue)));
+        
     }
     
     public List<IAbility> Abilities { get; } = new();
@@ -47,6 +45,6 @@ public class Entity
 
     public override string ToString()
     {
-        return $"{Health.Value.FinalValue} / {MaxHealth.Value.FinalValue}";
+        return $"{Health.Value.Value.FinalValue} / {Health.MaxValue.Value.FinalValue}";
     }
 }
