@@ -3,7 +3,7 @@ using StatAndAbilitySystem.Modifiers;
 
 namespace StatAndAbilitySystem;
 
-public class FloatStat : IStat<float>
+public struct FloatStat : IStat<float>
 {
     public event Action<IStat<float>> Changed; 
     public float CurrentValue => Value.FinalValue;

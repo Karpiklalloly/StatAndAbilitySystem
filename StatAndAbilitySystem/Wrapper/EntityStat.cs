@@ -1,16 +1,16 @@
-﻿using StatAndAbilitySystem.Base;
+using StatAndAbilitySystem.Base;
 using StatAndAbilitySystem.Modifiers;
 
 namespace StatAndAbilitySystem.Wrapper;
 
-public abstract class EntityStat : IEntityStat
+public struct EntityStat : IEntityStat
 {
-    public IStat<float> MinValue { get; }
-    public IStat<float> Value { get; }
-    public IStat<float> MaxValue { get; }
+    public FloatStat MinValue { get; }
+    public FloatStat Value { get; }
+    public FloatStat MaxValue { get; }
 
-    public virtual bool HasMinValue { get; }
-    public virtual bool HasMaxValue { get; }
+    public bool HasMinValue { get; }
+    public bool HasMaxValue { get; }
 
     public EntityStat(float value)
     {
@@ -40,15 +40,17 @@ public abstract class EntityStat : IEntityStat
         BindMin();
     }
 
-    protected void BindMax()
+    private void BindMax()
     {
-        Value.ApplyModifier(new MaxValueModifier(
-            () => new FloatValue(float.MaxValue, MaxValue.CurrentValue, float.MaxValue)));
+        Value.ApplyModifier(new MaxValueModifier(Max));
     }
 
-    protected void BindMin()
+    private void BindMin()
     {
-        Value.ApplyModifier(new MinValueModifier(
-            () => new FloatValue(0, MinValue.CurrentValue, 0)));
+        Value.ApplyModifier(new MinValueModifier(Min));
     }
+
+    private FloatValue Max() => new(float.MaxValue, MaxValue.CurrentValue, float.MaxValue);
+
+    private FloatValue Min() => new(0, MinValue.CurrentValue, float.MinValue);
 }

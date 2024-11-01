@@ -6,18 +6,13 @@ namespace StatAndAbilitySystem;
 
 public class Entity
 {
-    public EntityHealth Health { get; } = new(100, 100);
-    public Mana Mana { get; } = new(new FloatValue(100));
-    public Damage Damage { get; } = new(new FloatValue(10));
+    public EntityStat Health { get; } = new(100, 100, 0);
+    public EntityStat Mana { get; } = new(100, 100, 0);
+    public EntityStat Damage { get; } = new(10);
     public float Time => _time;
     
     private List<Buff> _buffs = new();
     private float _time = 0;
-
-    public Entity()
-    {
-        
-    }
     
     public List<IAbility> Abilities { get; } = new();
 
