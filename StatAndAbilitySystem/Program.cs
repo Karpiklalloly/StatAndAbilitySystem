@@ -13,7 +13,6 @@ class Program
         entity.AddStat(new Mana(100, 100));
         entity.AddStat(new Damage(10));
         
-        
         Console.WriteLine(entity);
         
         var health = entity.GetStat<Health>().EntityStat;
@@ -24,7 +23,7 @@ class Program
         Console.WriteLine(health.ToString());
         Console.WriteLine();
 
-        entity.ApplyBuff(new IncreaseMaxHealthBuff(100, entity.Time, 5));
+        entity.ApplyBuff(new ChangeMax<Health>(100, entity.Time, 5));
         
         while (true)
         {
