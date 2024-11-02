@@ -1,14 +1,13 @@
 ﻿using StatAndAbilitySystem.Base;
-using StatAndAbilitySystem.Modifiers;
 using StatAndAbilitySystem.Wrapper;
+using StatAndAbilitySystem.Wrapper.Examples;
 
 namespace StatAndAbilitySystem;
 
 public class Entity
 {
-    public EntityStat Health { get; } = new(100, 100, 0);
-    public EntityStat Mana { get; } = new(100, 100, 0);
-    public EntityStat Damage { get; } = new(10);
+    private List<Stat> _stats = new();
+    
     public float Time => _time;
     
     private List<Buff> _buffs = new();
@@ -20,7 +19,8 @@ public class Entity
     {
         _time++;
 
-        foreach (var buff in _buffs.Where(x => x.StartTime + x.Duration < _time).ToArray())
+        var buffs = _buffs.Where(x => x.StartTime + x.Duration < _time).ToArray();
+        foreach (var buff in buffs)
         {
             RemoveBuff(buff);
         }
@@ -38,8 +38,25 @@ public class Entity
         buff.Remove(this);
     }
 
-    public override string ToString()
+    public void AddStat<T>(T stat) where T : Stat
     {
-        return $"{Health.Value.Value.FinalValue} / {Health.MaxValue.Value.FinalValue}";
+        _stats.Add(stat);
+    }
+    
+    public T GetStat<T>() where T : Stat
+    {
+        return (T)_stats.Find(x => x.GetType() == typeof(T));
+    }
+
+    public bool TryGetStat<T>(out T stat) where T : Stat
+    {
+        var index = _stats.FindIndex(x => x.GetType() == typeof(T));
+        if (index == -1)
+        {
+            stat = null;
+            return false;
+        }
+        stat = (T)_stats[index];
+        return true;
     }
 }

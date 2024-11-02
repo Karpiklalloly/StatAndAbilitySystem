@@ -1,4 +1,5 @@
 ﻿using StatAndAbilitySystem.Modifiers;
+using StatAndAbilitySystem.Wrapper.Examples;
 
 namespace StatAndAbilitySystem.Wrapper;
 
@@ -13,13 +14,18 @@ public class IncreaseMaxHealthBuff : Buff
 
     public override void Apply(Entity entity)
     {
-        entity.Health.MaxValue.ApplyModifier(Modifier);
-        entity.Health.Value.Recalculate();
+        if (!entity.TryGetStat(out Health health)) return;
+        
+        health.EntityStat.MaxValue.ApplyModifier(Modifier);
+        health.EntityStat.Value.Recalculate();
+
     }
 
     public override void Remove(Entity entity)
     {
-        entity.Health.MaxValue.RemoveModifier(Modifier);
-        entity.Health.Value.Recalculate();
+        if (!entity.TryGetStat(out Health health)) return;
+        
+        health.EntityStat.MaxValue.RemoveModifier(Modifier);
+        health.EntityStat.Value.Recalculate();
     }
 }

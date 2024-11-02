@@ -40,6 +40,13 @@ public struct EntityStat : IEntityStat
         BindMin();
     }
 
+    public override string ToString()
+    {
+        return $"{MinValue.Value.ModifiedBaseValue} + {MinValue.Value.AdditionalValue} / " +
+               $"{Value.Value.ModifiedBaseValue} + {Value.Value.AdditionalValue} / " +
+               $"{MaxValue.Value.ModifiedBaseValue} + {MaxValue.Value.AdditionalValue}";
+    }
+
     private void BindMax()
     {
         Value.ApplyModifier(new MaxValueModifier(Max));

@@ -1,5 +1,6 @@
 ﻿using StatAndAbilitySystem.Modifiers;
 using StatAndAbilitySystem.Wrapper;
+using StatAndAbilitySystem.Wrapper.Examples;
 
 namespace StatAndAbilitySystem;
 
@@ -8,12 +9,19 @@ class Program
     static void Main(string[] args)
     {
         Entity entity = new();
+        entity.AddStat(new Health(100, 100));
+        entity.AddStat(new Mana(100, 100));
+        entity.AddStat(new Damage(10));
+        
+        
         Console.WriteLine(entity);
         
-        entity.Health.Value.ApplyModifier(new FloatMultiplierModifier(3, 1, 0));
+        var health = entity.GetStat<Health>().EntityStat;
+        health.Value.ApplyModifier(new FloatMultiplierModifier(3, 1, 0));
         
         Console.WriteLine(entity.Time);
-        Console.WriteLine($"Health: {entity.Health.Value.Value.ModifiedBaseValue} + {entity.Health.Value.Value.AdditionalValue} / {entity.Health.MaxValue.Value.ModifiedBaseValue} + {entity.Health.MaxValue.Value.AdditionalValue}");
+        Console.Write("Health: ");
+        Console.WriteLine(health.ToString());
         Console.WriteLine();
 
         entity.ApplyBuff(new IncreaseMaxHealthBuff(100, entity.Time, 5));
@@ -22,9 +30,8 @@ class Program
         {
             entity.Update();
             Console.WriteLine(entity.Time);
-            Console.WriteLine($"Health: {entity.Health.MinValue.Value.ModifiedBaseValue} + {entity.Health.MinValue.Value.AdditionalValue} / " +
-                              $"{entity.Health.Value.Value.ModifiedBaseValue} + {entity.Health.Value.Value.AdditionalValue} / " +
-                              $"{entity.Health.MaxValue.Value.ModifiedBaseValue} + {entity.Health.MaxValue.Value.AdditionalValue}");
+            Console.Write("Health: ");
+            Console.WriteLine(health.ToString());
             Console.WriteLine();
             var key = Console.ReadKey();
 
